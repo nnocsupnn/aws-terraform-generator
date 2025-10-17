@@ -22,9 +22,9 @@ function App() {
             className={`tab-btn ${activeTab === 'single' ? 'active' : ''}`}
             style={{
               padding: '10px 20px',
-              background: activeTab === 'single' ? 'rgba(255,255,255,0.9)' : 'rgba(255,255,255,0.3)',
-              color: activeTab === 'single' ? '#333' : 'white',
-              border: 'none',
+              background: activeTab === 'single' ? 'linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%)' : 'rgba(44, 44, 84, 0.7)',
+              color: 'white',
+              border: activeTab === 'single' ? '2px solid #6c5ce7' : '2px solid rgba(255,255,255,0.2)',
               borderRadius: '8px',
               cursor: 'pointer',
               fontSize: '1rem',
@@ -39,9 +39,9 @@ function App() {
             className={`tab-btn ${activeTab === 'multiple' ? 'active' : ''}`}
             style={{
               padding: '10px 20px',
-              background: activeTab === 'multiple' ? 'rgba(255,255,255,0.9)' : 'rgba(255,255,255,0.3)',
-              color: activeTab === 'multiple' ? '#333' : 'white',
-              border: 'none',
+              background: activeTab === 'multiple' ? 'linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%)' : 'rgba(44, 44, 84, 0.7)',
+              color: 'white',
+              border: activeTab === 'multiple' ? '2px solid #6c5ce7' : '2px solid rgba(255,255,255,0.2)',
               borderRadius: '8px',
               cursor: 'pointer',
               fontSize: '1rem',

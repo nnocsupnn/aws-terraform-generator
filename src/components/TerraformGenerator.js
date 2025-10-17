@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { TerraformParser } from '../utils/TerraformParser';
 import TerraformSyntaxHighlighter from '../utils/TerraformSyntaxHighlighter';
+import Tooltip from './Tooltip';
 
 const TerraformGenerator = () => {
   const [formData, setFormData] = useState({
@@ -99,7 +100,7 @@ const TerraformGenerator = () => {
       <div className="form-card">
         <div style={{ marginBottom: '25px' }}>
           <div className="single-endpoint-header">
-            <h2 style={{ margin: 0, color: '#333' }}>Configuration</h2>
+            <h2 style={{ margin: 0, color: '#e5e4e4ff' }}>Configuration</h2>
             <button 
               type="button" 
               onClick={handleLoadExample}
@@ -128,47 +129,62 @@ const TerraformGenerator = () => {
         <form onSubmit={handleGenerate}>
           <div className="form-group">
             <label htmlFor="endpoint">API Endpoint</label>
-            <input
-              type="text"
-              id="endpoint"
-              name="endpoint"
-              value={formData.endpoint}
-              onChange={handleInputChange}
-              placeholder="/person/users/api/auth"
-              required
-            />
-            <small style={{ color: '#666', fontSize: '0.9rem', marginTop: '5px', display: 'block' }}>
+            <Tooltip 
+              content={formData.endpoint || "Enter API endpoint path (e.g., /api/users, /auth/login)"} 
+              type="endpoint"
+            >
+              <input
+                type="text"
+                id="endpoint"
+                name="endpoint"
+                value={formData.endpoint}
+                onChange={handleInputChange}
+                placeholder="/person/users/api/auth"
+                required
+              />
+            </Tooltip>
+            <small style={{ color: '#dededeff', fontSize: '0.9rem', marginTop: '5px', display: 'block' }}>
               Enter the API endpoint path (e.g., /person/users/api/auth)
             </small>
           </div>
 
           <div className="form-group">
             <label htmlFor="method">HTTP Method</label>
-            <select
-              id="method"
-              name="method"
-              value={formData.method}
-              onChange={handleInputChange}
-              required
+            <Tooltip 
+              content={`Selected HTTP Method: ${formData.method}`} 
+              type="method"
             >
-              {httpMethods.map(method => (
-                <option key={method} value={method}>{method}</option>
-              ))}
-            </select>
+              <select
+                id="method"
+                name="method"
+                value={formData.method}
+                onChange={handleInputChange}
+                required
+              >
+                {httpMethods.map(method => (
+                  <option key={method} value={method}>{method}</option>
+                ))}
+              </select>
+            </Tooltip>
           </div>
 
           <div className="form-group">
             <label htmlFor="backendUri">Backend Integration URI</label>
-            <input
+            <Tooltip 
+              content={formData.backendUri || "Enter the full backend URI for integration (e.g., https://api.example.com/endpoint)"} 
               type="url"
-              id="backendUri"
-              name="backendUri"
-              value={formData.backendUri}
-              onChange={handleInputChange}
-              placeholder="https://personapi.api.com/person/users/api/auth"
-              required
-            />
-            <small style={{ color: '#666', fontSize: '0.9rem', marginTop: '5px', display: 'block' }}>
+            >
+              <input
+                type="url"
+                id="backendUri"
+                name="backendUri"
+                value={formData.backendUri}
+                onChange={handleInputChange}
+                placeholder="https://personapi.api.com/person/users/api/auth"
+                required
+              />
+            </Tooltip>
+            <small style={{ color: '#dededeff', fontSize: '0.9rem', marginTop: '5px', display: 'block' }}>
               Enter the full backend URI for integration
             </small>
           </div>
@@ -184,7 +200,7 @@ const TerraformGenerator = () => {
               />
               <span>API Key Required</span>
             </label>
-            <small style={{ color: '#666', fontSize: '0.9rem', marginTop: '5px', display: 'block' }}>
+            <small style={{ color: '#dededeff', fontSize: '0.9rem', marginTop: '5px', display: 'block' }}>
               Check this if the API endpoint requires an API key for access
             </small>
           </div>

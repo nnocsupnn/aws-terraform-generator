@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { TerraformParser } from '../utils/TerraformParser';
 import TerraformSyntaxHighlighter from '../utils/TerraformSyntaxHighlighter';
+import Tooltip from './Tooltip';
 
 const MultiEndpointGenerator = () => {
   const [endpoints, setEndpoints] = useState([
@@ -161,8 +162,8 @@ const MultiEndpointGenerator = () => {
     <div className="main-content">
       <div className="form-card">
         <div style={{ marginBottom: '25px' }}>
-          <h2 style={{ margin: 0, color: '#333' }}>Multiple Endpoints Configuration</h2>
-          <p style={{ margin: '10px 0 0 0', color: '#666', fontSize: '0.95rem' }}>
+          <h2 style={{ margin: 0, color: '#e8e8e8ff' }}>Multiple Endpoints Configuration</h2>
+          <p style={{ margin: '10px 0 0 0', color: '#dededeff', fontSize: '0.95rem' }}>
             Add multiple API endpoints to generate connected Terraform resources with shared path optimization.
           </p>
         </div>
@@ -180,9 +181,9 @@ const MultiEndpointGenerator = () => {
             gap: '10px',
             marginBottom: '15px',
             padding: '10px',
-            background: '#f8f9fa',
+            background: '#2d2c55', 
             borderRadius: '6px',
-            border: '1px solid #e9ecef'
+            // border: '1px solid #e9ecef'
           }}>
             <button
               type="button"
@@ -235,28 +236,28 @@ const MultiEndpointGenerator = () => {
               Clear All
             </button>
             
-            <div style={{ marginLeft: 'auto', color: '#6c757d', fontSize: '0.9rem', display: 'flex', alignItems: 'center' }} className="endpoint-counter">
+            <div style={{ marginLeft: 'auto', color: '#d7d7d7ff', fontSize: '0.9rem', display: 'flex', alignItems: 'center' }} className="endpoint-counter">
               Total Endpoints: <strong style={{ marginLeft: '5px' }}>{endpoints.length}</strong>
             </div>
           </div>
 
           {/* Endpoints Table */}
           <div className="endpoints-table-container" style={{
-            border: '1px solid #e1e5e9',
+            border: '1px solid #444',
             borderRadius: '8px',
             overflow: 'hidden',
             marginBottom: '20px',
-            background: 'white'
+            background: 'linear-gradient(135deg, #2c2c54 0%, #40407a 100%)'
           }}>
             <div style={{
-              background: '#f8f9fa',
+              background: 'rgba(0, 0, 0, 0.2)',
               padding: '15px 20px',
-              borderBottom: '1px solid #e1e5e9',
+              borderBottom: '1px solid #555',
               display: 'flex',
               justifyContent: 'space-between',
               alignItems: 'center'
             }}>
-              <h4 style={{ margin: 0, color: '#495057' }}>API Endpoints Configuration</h4>
+              <h4 style={{ margin: 0, color: '#f1f3f4', fontWeight: '600' }}>API Endpoints Configuration</h4>
             </div>
 
             <div className="table-scroll" style={{ 
@@ -270,7 +271,7 @@ const MultiEndpointGenerator = () => {
                 minWidth: '750px'
               }} className="responsive-table">
                 <thead style={{ 
-                  background: '#f8f9fa',
+                  background: 'rgba(0, 0, 0, 0.3)',
                   position: 'sticky',
                   top: 0,
                   zIndex: 1
@@ -279,32 +280,40 @@ const MultiEndpointGenerator = () => {
                     <th style={{ 
                       padding: '12px 15px', 
                       textAlign: 'left', 
-                      borderBottom: '1px solid #e1e5e9',
-                      width: '32%'
+                      borderBottom: '1px solid #555',
+                      width: '32%',
+                      color: '#f1f3f4',
+                      fontWeight: '600'
                     }}>
                       API Endpoint
                     </th>
                     <th style={{ 
                       padding: '12px 15px', 
                       textAlign: 'left', 
-                      borderBottom: '1px solid #e1e5e9',
-                      width: '12%'
+                      borderBottom: '1px solid #555',
+                      width: '12%',
+                      color: '#f1f3f4',
+                      fontWeight: '600'
                     }}>
                       Method
                     </th>
                     <th style={{ 
                       padding: '12px 15px', 
                       textAlign: 'left', 
-                      borderBottom: '1px solid #e1e5e9',
-                      width: '38%'
+                      borderBottom: '1px solid #555',
+                      width: '38%',
+                      color: '#f1f3f4',
+                      fontWeight: '600'
                     }}>
                       Backend URI
                     </th>
                     <th style={{ 
                       padding: '12px 15px', 
                       textAlign: 'center', 
-                      borderBottom: '1px solid #e1e5e9',
-                      width: '8%'
+                      borderBottom: '1px solid #555',
+                      width: '8%',
+                      color: '#f1f3f4',
+                      fontWeight: '600'
                     }}>
                       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px' }}>
                         <span>API Key</span>
@@ -322,8 +331,10 @@ const MultiEndpointGenerator = () => {
                     <th style={{ 
                       padding: '12px 15px', 
                       textAlign: 'center', 
-                      borderBottom: '1px solid #e1e5e9',
-                      width: '10%'
+                      borderBottom: '1px solid #555',
+                      width: '10%',
+                      color: '#f1f3f4',
+                      fontWeight: '600'
                     }}>
                       Actions
                     </th>
@@ -332,95 +343,104 @@ const MultiEndpointGenerator = () => {
                 <tbody>
                   {endpoints.map((endpoint, index) => (
                     <tr key={endpoint.id} style={{
-                      borderBottom: index === endpoints.length - 1 ? 'none' : '1px solid #f1f3f4'
+                      borderBottom: index === endpoints.length - 1 ? 'none' : '1px solid #555'
                     }}>
                       <td style={{ padding: '8px 15px' }}>
-                        <input
-                          type="text"
-                          value={endpoint.endpoint}
-                          onChange={(e) => updateEndpoint(endpoint.id, 'endpoint', e.target.value)}
-                          placeholder="/person/users/api/auth"
-                          style={{
-                            width: '100%',
-                            padding: '8px 12px',
-                            border: '1px solid #e1e5e9',
-                            borderRadius: '4px',
-                            fontSize: '0.9rem'
-                          }}
-                        />
-                      </td>
-                      <td style={{ padding: '8px 15px' }}>
-                        <select
-                          value={endpoint.method}
-                          onChange={(e) => updateEndpoint(endpoint.id, 'method', e.target.value)}
-                          style={{
-                            width: '100%',
-                            padding: '8px 12px',
-                            border: '1px solid #e1e5e9',
-                            borderRadius: '4px',
-                            fontSize: '0.9rem'
-                          }}
+                        <Tooltip 
+                          content={endpoint.endpoint || "Enter API endpoint path (e.g., /api/users)"} 
+                          type="endpoint"
+                          position="top"
                         >
-                          {httpMethods.map(method => (
-                            <option key={method} value={method}>{method}</option>
-                          ))}
-                        </select>
+                          <input
+                            type="text"
+                            value={endpoint.endpoint}
+                            onChange={(e) => updateEndpoint(endpoint.id, 'endpoint', e.target.value)}
+                            placeholder="/person/users/api/auth"
+                            style={{
+                              width: '100%',
+                              padding: '8px 12px',
+                              border: '1px solid #666',
+                              borderRadius: '4px',
+                              fontSize: '0.9rem',
+                              background: '#2a2a2a',
+                              color: '#f1f3f4',
+                              fontWeight: '400'
+                            }}
+                          />
+                        </Tooltip>
                       </td>
                       <td style={{ padding: '8px 15px' }}>
-                        <input
+                        <Tooltip 
+                          content={endpoint.method} 
+                          position='top'
+                          type="method"
+                        >
+                          <select
+                            value={endpoint.method}
+                            onChange={(e) => updateEndpoint(endpoint.id, 'method', e.target.value)}
+                            style={{
+                              width: '100%',
+                              padding: '8px 2px',
+                              border: '1px solid #666',
+                              borderRadius: '4px',
+                              fontSize: '0.9rem',
+                              background: '#2a2a2a',
+                              color: '#f1f3f4',
+                              fontWeight: '400'
+                            }}
+                          >
+                            {httpMethods.map(method => (
+                              <option key={method} value={method}>{method}</option>
+                            ))}
+                          </select>
+                        </Tooltip>
+                      </td>
+                      <td style={{ padding: '8px 15px' }}>
+                        <Tooltip 
+                          content={endpoint.backendUri || "Enter backend integration URI (e.g., https://api.example.com/endpoint)"} 
                           type="url"
-                          value={endpoint.backendUri}
-                          onChange={(e) => updateEndpoint(endpoint.id, 'backendUri', e.target.value)}
-                          placeholder="https://api.example.com/endpoint"
-                          style={{
-                            width: '100%',
-                            padding: '8px 12px',
-                            border: '1px solid #e1e5e9',
-                            borderRadius: '4px',
-                            fontSize: '0.9rem'
-                          }}
-                        />
+                          position="top"
+                        >
+                          <input
+                            type="url"
+                            value={endpoint.backendUri}
+                            onChange={(e) => updateEndpoint(endpoint.id, 'backendUri', e.target.value)}
+                            placeholder="https://api.example.com/endpoint"
+                            style={{
+                              width: '100%',
+                              padding: '8px 12px',
+                              border: '1px solid #666',
+                              borderRadius: '4px',
+                              fontSize: '0.9rem',
+                              background: '#2a2a2a',
+                              color: '#f1f3f4',
+                              fontWeight: '400'
+                            }}
+                          />
+                        </Tooltip>
                       </td>
                       <td style={{ padding: '8px 15px', textAlign: 'center' }}>
-                        <input
-                          type="checkbox"
-                          checked={endpoint.apiKeyRequired}
-                          onChange={(e) => updateEndpoint(endpoint.id, 'apiKeyRequired', e.target.checked)}
-                          style={{
-                            cursor: 'pointer',
-                            transform: 'scale(1.2)'
-                          }}
-                          title="Require API Key for this endpoint"
-                        />
+                        <Tooltip content="Check if this endpoint requires an API key for access">
+                          <input
+                            type="checkbox"
+                            checked={endpoint.apiKeyRequired}
+                            onChange={(e) => updateEndpoint(endpoint.id, 'apiKeyRequired', e.target.checked)}
+                            style={{
+                              cursor: 'pointer',
+                              transform: 'scale(1.2)'
+                            }}
+                          />
+                        </Tooltip>
                       </td>
                       <td style={{ padding: '8px 15px', textAlign: 'center' }}>
                         <div className="action-buttons">
-                          <button
-                            type="button"
-                            onClick={() => duplicateEndpoint(endpoint)}
-                            className="duplicate-btn"
-                            style={{
-                              background: '#17a2b8',
-                              color: 'white',
-                              border: 'none',
-                              borderRadius: '4px',
-                              padding: '6px 8px',
-                              cursor: 'pointer',
-                              fontSize: '0.8rem',
-                              minWidth: '24px',
-                              height: '28px'
-                            }}
-                            title="Duplicate endpoint"
-                          >
-                            ⧉
-                          </button>
-                          {endpoints.length > 1 && (
+                          <Tooltip content="Duplicate this endpoint configuration">
                             <button
                               type="button"
-                              onClick={() => removeEndpoint(endpoint.id)}
-                              className="remove-endpoint-btn"
+                              onClick={() => duplicateEndpoint(endpoint)}
+                              className="duplicate-btn"
                               style={{
-                                background: '#dc3545',
+                                background: '#17a2b8',
                                 color: 'white',
                                 border: 'none',
                                 borderRadius: '4px',
@@ -430,10 +450,31 @@ const MultiEndpointGenerator = () => {
                                 minWidth: '24px',
                                 height: '28px'
                               }}
-                              title="Remove endpoint"
                             >
-                              ×
+                              ⧉
                             </button>
+                          </Tooltip>
+                          {endpoints.length > 1 && (
+                            <Tooltip content="Remove this endpoint">
+                              <button
+                                type="button"
+                                onClick={() => removeEndpoint(endpoint.id)}
+                                className="remove-endpoint-btn"
+                                style={{
+                                  background: '#dc3545',
+                                  color: 'white',
+                                  border: 'none',
+                                  borderRadius: '4px',
+                                  padding: '6px 8px',
+                                  cursor: 'pointer',
+                                  fontSize: '0.8rem',
+                                  minWidth: '24px',
+                                  height: '28px'
+                                }}
+                              >
+                                ×
+                              </button>
+                            </Tooltip>
                           )}
                         </div>
                       </td>
