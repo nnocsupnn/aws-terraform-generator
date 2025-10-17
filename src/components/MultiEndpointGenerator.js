@@ -548,8 +548,8 @@ const MultiEndpointGenerator = () => {
           <div className="optimization-info" style={{ 
             marginTop: '15px', 
             padding: '15px', 
-            background: 'linear-gradient(135deg, #e8f5e8 0%, #f0f8f0 100%)',
             borderRadius: '6px', 
+            color: '#f1f3f4',
             fontSize: '0.9rem',
             lineHeight: '1.5',
             border: '1px solid #c3e6c3'
